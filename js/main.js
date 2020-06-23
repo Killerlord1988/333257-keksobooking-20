@@ -259,11 +259,13 @@ mainPin.addEventListener('keydown', onMapPinEnterPress);
 
 // Find list of options of rooms
 var selectRooms = document.querySelector('#room_number');
-var optionGuests = document.querySelector('#capacity').querySelectorAll('option');
+var selectGuests = document.querySelector('#capacity');
+var optionGuests = selectGuests.querySelectorAll('option');
 
 // Put disabled on list of guests to avoid bag with 1 room and 1 guest when the page
 // will be opened without changing amount of rooms
 setOptionDisabled(optionGuests);
+optionGuests[2].removeAttribute('disabled', 'disabled');
 
 // Create a function to cansel disabled on option for choosing guests
 var getAvailableGuests = function () {
@@ -274,6 +276,13 @@ var getAvailableGuests = function () {
     for (var k = 0; k < dataGuests.length; k++) {
       if (GUESTS[j] === dataGuests[k]) {
         optionGuests[j].removeAttribute('disabled', 'disabled');
+      }
+
+      // Selecting one guest to avoid validation errors
+      if (index <= dataGuests.length - 1) {
+        selectGuests.selectedIndex = 2;
+      } else {
+        selectGuests.selectedIndex = 3;
       }
     }
   }
