@@ -111,7 +111,7 @@
         }
 
         // Selecting one guest to avoid validation errors
-        if (index <= dataGuests.length - 1) {
+        if (index < dataGuests.length) {
           selectGuests.selectedIndex = 2;
         } else {
           selectGuests.selectedIndex = 3;
@@ -155,5 +155,4 @@
     // getTimeIn();
     timein.value = timeout.value;
   });
-
 })();
