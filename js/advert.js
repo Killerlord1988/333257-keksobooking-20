@@ -17,7 +17,8 @@
   var renderAdvert = function (advertisment) {
     var advertElement = advertTemplate.cloneNode(true);
     advertElement.querySelector('.popup__title').textContent = advertisment.offer.title;
-    advertElement.querySelector('.popup__text--address').textContent = advertisment.offer.address;
+    // advertElement.querySelector('.popup__text--address').textContent = advertisment.offer.adress;
+
     advertElement.querySelector('.popup__text--price').textContent = advertisment.offer.price + ' ₽/ночь';
     advertElement.querySelector('.popup__type').textContent = TRANSLATE_OF_ACCOMODATION[advertisment.offer.type];
 
@@ -77,6 +78,8 @@
 
   // Копируем объявление в буфер
   advert.appendChild(renderAdvert(window.data.accomodations[0]));
+
+
 
   window.advert = {
     advert: advert,

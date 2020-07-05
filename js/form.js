@@ -1,7 +1,6 @@
 // File main.js
 'use strict';
 (function () {
-
   var form = document.querySelector('.ad-form');
 
   var DEFAULT_OPTION_IDX = 2;
@@ -11,23 +10,25 @@
   var MAIN_PIN_Y = 65;
   var MAIN_PIN_X_ACTIVE = 65;
   var MAIN_PIN_Y_ACTIVE = 87;
+
   var MINPRICE_OF_ACCOMODATION = {
     bungalo: 0,
     flat: 1000,
     house: 5000,
     palace: 10000
   };
+
   var ROOMS_GUESTS_RELATION = {
     1: [1],
     2: [1, 2],
     3: [1, 2, 3],
     0: [0]
   };
+
   var ROOMS = [1, 2, 3, 0];
   var GUESTS = [3, 2, 1, 0];
 
-  // Find form to ban fieldset be edited
-  var advertFieldset = form.querySelectorAll('fieldset');
+  var advertFieldsets = form.querySelectorAll('fieldset');
 
   // Create a function for setting 'disabled' on fields of the form
   var setOptionDisabled = function (fields) {
@@ -38,28 +39,35 @@
   };
 
   // Set 'disabled' on each fieldset of the form
-  setOptionDisabled(advertFieldset);
+  setOptionDisabled(advertFieldsets);
 
   // Create function to set address in a form
   var getAddress = function (pinX, pinY) {
     var addressInput = document.querySelector('#address');
     var pointX = parseInt(window.pin.mainPin.style.left, 10) + pinX / 2;
+    var pointY = null;
+
     if (pinY === MAIN_PIN_Y) {
-      var pointY = parseInt(window.pin.mainPin.style.top, 10) + pinY / 2;
+      pointY = parseInt(window.pin.mainPin.style.top, 10) + pinY / 2;
     } else {
       pointY = parseInt(window.pin.mainPin.style.top, 10) + pinY;
     }
+
     addressInput.setAttribute('value', pointX + ', ' + pointY);
+  };
+
+  var removeClass = function (node, className) {
+    node.classList.remove(className);
   };
 
   // Set address on the inactive map
   getAddress(MAIN_PIN_X, MAIN_PIN_Y);
 
   // Create function for deleting 'disabled' from each fieldset of the form
-  var mousedown = function (object) {
-    for (var k = 0; k < object.length; k++) {
-      var objectItem = object[k];
-      objectItem.removeAttribute('disabled', 'disabled');
+  var mousedown = function (fieldsets) {
+    for (var k = 0; k < fieldsets.length; k++) {
+      var fieldset = fieldsets[k];
+      fieldset.removeAttribute('disabled', 'disabled');
     }
     // Change сoordinates for pin in the field of address
     getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
@@ -67,30 +75,25 @@
     window.pin.mapPins.appendChild(window.pin.fragment);
     // Render advert on the map from buffer
     window.pin.map.insertBefore(window.advert.advert, window.pin.map.querySelector('.map__filters-container'));
-    window.pin.map.classList.remove('map--faded');
-    form.classList.remove('ad-form--disabled');
-    window.pin.mainPin.removeEventListener('click', activeForm);
 
+    removeClass(window.pin.map, 'map--faded');
+    removeClass(form, 'ad-form--disabled');
+    window.pin.mainPin.removeEventListener('click', activateForm);
   };
 
   // Put a function in constant for way to delete it from a handler
-  var activeForm = function () {
-    mousedown(advertFieldset);
+  var activateForm = function () {
+    mousedown(advertFieldsets);
   };
 
   // Create function for activating form by pressing Enter
   var onMapPinEnterPress = function (evt) {
     if (evt.keyCode === window.util.ENT_CODE) {
-      mousedown(advertFieldset);
+      mousedown(advertFieldsets);
       getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
     }
   };
 
-  // Put a handler on the major pin for click
-  window.pin.mainPin.addEventListener('click', activeForm);
-
-  // Put a handler on the major pin for keydownn
-  window.pin.mainPin.addEventListener('keydown', onMapPinEnterPress);
 
   // Find list of options of rooms
   var selectRooms = document.querySelector('#room_number');
@@ -107,6 +110,7 @@
     setOptionDisabled(optionGuests);
     var selectedRoom = selectRooms.selectedIndex;
     var dataGuests = ROOMS_GUESTS_RELATION[ROOMS[selectedRoom]];
+
     for (var j = 0; j < GUESTS.length; j++) {
       for (var k = 0; k < dataGuests.length; k++) {
         if (GUESTS[j] === dataGuests[k]) {
@@ -151,7 +155,11 @@
   timein.addEventListener('change', function () {
     timeout.value = timein.value;
   });
+
   timeout.addEventListener('change', function () {
     timein.value = timeout.value;
   });
+
+  window.activateForm = activateForm;
+  window.onMapPinEnterPress = onMapPinEnterPress;
 })();
