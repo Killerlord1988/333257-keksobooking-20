@@ -9,9 +9,9 @@
     palace: 'Дворец'
   };
 
-  var advertTemplate = document.querySelector('#card').
-  content.
-  querySelector('.map__card'); // Ищем шаблон обявления для пина карты
+  var advertTemplate = document.querySelector('#card')
+    .content.
+    querySelector('.map__card'); // Ищем шаблон обявления для пина карты
 
   // Создаем объявление на карте из шаблона
   var renderAdvert = function (advertisment) {
@@ -26,7 +26,9 @@
 
     // Добавляем удобства на карточку объявления исходя из рандомного массива
     var list = advertElement.querySelector('.popup__features');
+
     list.innerHTML = '';
+
     for (var j = 0; j < advertisment.offer.features.length; j++) {
       var listItem = document.createElement('li');
       listItem.classList.add('popup__feature--' + advertisment.offer.features[j], 'popup__feature');

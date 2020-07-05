@@ -7,14 +7,14 @@
     ECS_CODE: 27, // Keycode of escape button
 
     // Генерация рандомного массива
-    getRandomData: function (object) {
+    getRandomData: function (dataSet) {
 
       // Генерируем рандомную длинну массива
-      var randomNumber = this.getRandomFloat(0, object.length);
+      var randomNumber = this.getRandomFloat(0, dataSet.length);
       var data = [];
       // Записываем в рандомный массив данные из массива переданного в параметр
-      for (var k = 0; k < randomNumber; k++) {
-        data.push(object[k]);
+      for (var key = 0; key < randomNumber; key++) {
+        data.push(dataSet[key]);
       }
       return data;
     },

@@ -4,6 +4,9 @@
 
   var form = document.querySelector('.ad-form');
 
+  var DEFAULT_OPTION_IDX = 2;
+  var NOT_GUEST_OPTION_IDX = 3;
+
   var MAIN_PIN_X = 65;
   var MAIN_PIN_Y = 65;
   var MAIN_PIN_X_ACTIVE = 65;
@@ -27,9 +30,9 @@
   var advertFieldset = form.querySelectorAll('fieldset');
 
   // Create a function for setting 'disabled' on fields of the form
-  var setOptionDisabled = function (object) {
-    for (var j = 0; j < object.length; j++) {
-      var fieldsetItem = object[j];
+  var setOptionDisabled = function (fields) {
+    for (var j = 0; j < fields.length; j++) {
+      var fieldsetItem = fields[j];
       fieldsetItem.setAttribute('disabled', 'disabled');
     }
   };
@@ -102,8 +105,8 @@
   // Create a function to cansel disabled on option for choosing guests
   var getAvailableGuests = function () {
     setOptionDisabled(optionGuests);
-    var index = selectRooms.selectedIndex;
-    var dataGuests = ROOMS_GUESTS_RELATION[ROOMS[index]];
+    var selectedRoom = selectRooms.selectedIndex;
+    var dataGuests = ROOMS_GUESTS_RELATION[ROOMS[selectedRoom]];
     for (var j = 0; j < GUESTS.length; j++) {
       for (var k = 0; k < dataGuests.length; k++) {
         if (GUESTS[j] === dataGuests[k]) {
@@ -111,10 +114,10 @@
         }
 
         // Selecting one guest to avoid validation errors
-        if (index < dataGuests.length) {
-          selectGuests.selectedIndex = 2;
+        if (selectedRoom < dataGuests.length) {
+          selectGuests.selectedIndex = DEFAULT_OPTION_IDX;
         } else {
-          selectGuests.selectedIndex = 3;
+          selectGuests.selectedIndex = NOT_GUEST_OPTION_IDX;
         }
       }
     }
@@ -142,17 +145,13 @@
     getMinPriceOfAccomodation();
   });
 
-  // Create function for cleaning data from selected
   var timein = document.querySelector('#timein');
   var timeout = document.querySelector('#timeout');
 
-  // Event on handlers if timein/timeout are changed
   timein.addEventListener('change', function () {
-    // getTimeOut();
     timeout.value = timein.value;
   });
   timeout.addEventListener('change', function () {
-    // getTimeIn();
     timein.value = timeout.value;
   });
 })();
