@@ -41,6 +41,10 @@
   // Set 'disabled' on each fieldset of the form
   setOptionDisabled(advertFieldsets);
 
+  var roundedNumber = function (number) {
+    return '' + number.toFixed(0);
+  };
+
   // Create function to set address in a form
   var getAddress = function (pinX, pinY) {
     var addressInput = document.querySelector('#address');
@@ -53,7 +57,7 @@
       pointY = parseInt(window.pin.mainPin.style.top, 10) + pinY;
     }
 
-    addressInput.setAttribute('value', pointX + ', ' + pointY);
+    addressInput.setAttribute('value', roundedNumber(pointX) + ', ' + roundedNumber(pointY));
   };
 
   var removeClass = function (node, className) {
