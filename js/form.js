@@ -9,7 +9,11 @@
   var MAIN_PIN_X = 65;
   var MAIN_PIN_Y = 65;
   var MAIN_PIN_X_ACTIVE = 65;
-  var MAIN_PIN_Y_ACTIVE = 87;
+  var MAIN_PIN_Y_ACTIVE = 81;
+  var COORD_Y = {
+    min: 130,
+    max: 630
+  };
 
   var MINPRICE_OF_ACCOMODATION = {
     bungalo: 0,
@@ -27,6 +31,8 @@
 
   var ROOMS = [1, 2, 3, 0];
   var GUESTS = [3, 2, 1, 0];
+
+  var isActive = false;
 
   var advertFieldsets = form.querySelectorAll('fieldset');
 
@@ -98,6 +104,71 @@
     }
   };
 
+  // Put a handler on the major pin for keydownn
+  window.pin.mainPin.addEventListener('keydown', onMapPinEnterPress);
+
+  window.pin.mainPin.addEventListener('mousedown', function (evt) {
+
+    if (!isActive) {
+      mousedown(advertFieldsets);
+    }
+
+    var startCoords = {
+      x: evt.clientX,
+      y: evt.clientY
+    };
+
+    var onMouseMove = function (moveEvt) {
+      moveEvt.preventDefault();
+
+      var shift = {
+        x: startCoords.x - moveEvt.clientX,
+        y: startCoords.y - moveEvt.clientY
+      };
+
+      startCoords = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY
+      };
+
+      if (window.pin.mainPin.offsetLeft - shift.x + MAIN_PIN_X_ACTIVE / 2 < 0) {
+        startCoords.x = '0px' + MAIN_PIN_X_ACTIVE;
+        return startCoords.x;
+
+      } else if (window.pin.mainPin.offsetLeft - shift.x + MAIN_PIN_X_ACTIVE / 2 > window.pin.map.clientWidth) {
+        startCoords.x = window.pin.map.clientWidth + 'px';
+        return startCoords.x;
+      }
+
+      if (window.pin.mainPin.offsetTop - shift.y + MAIN_PIN_Y_ACTIVE > COORD_Y.max) {
+        startCoords.y = COORD_Y.max + 'px';
+        return startCoords.y;
+
+      } else if (window.pin.mainPin.offsetTop - shift.y + MAIN_PIN_Y_ACTIVE / 2 < COORD_Y.min) {
+        startCoords.y = COORD_Y.min + 'px';
+        return startCoords.y;
+      }
+
+      window.pin.mainPin.style.top = (window.pin.mainPin.offsetTop - shift.y) + 'px';
+      window.pin.mainPin.style.left = (window.pin.mainPin.offsetLeft - shift.x) + 'px';
+
+      return '1'; // eslint error
+    };
+
+    var onMouseUp = function (upEvt) {
+      upEvt.preventDefault();
+
+      // Change сoordinates for pin in the field of address
+      getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
+
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+
+  });
 
   // Find list of options of rooms
   var selectRooms = document.querySelector('#room_number');
