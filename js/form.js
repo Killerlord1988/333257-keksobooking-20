@@ -66,9 +66,9 @@
     addressInput.setAttribute('value', roundedNumber(pointX) + ', ' + roundedNumber(pointY));
   };
 
-  var removeClass = function (node, className) {
-    node.classList.remove(className);
-  };
+  // var removeClass = function (node, className) {
+  //   node.classList.remove(className);
+  // };
 
   // Set address on the inactive map
   getAddress(MAIN_PIN_X, MAIN_PIN_Y);
@@ -79,28 +79,36 @@
       var fieldset = fieldsets[k];
       fieldset.removeAttribute('disabled', 'disabled');
     }
-    // Change сoordinates for pin in the field of address
-    getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
-    // Render pins on the map from buffer
-    window.pin.mapPins.appendChild(window.pin.fragment);
-    // Render advert on the map from buffer
-    window.pin.map.insertBefore(window.advert.advert, window.pin.map.querySelector('.map__filters-container'));
 
-    removeClass(window.pin.map, 'map--faded');
-    removeClass(form, 'ad-form--disabled');
-    window.pin.mainPin.removeEventListener('click', activateForm);
+    // Render pins on the map from server data
+    var server = window.request;
+    server.load(server.successHandler, server.errorHandler);
+
+    // Change сoordinates for pin in the field of address
+    // getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
+
+    // Render advert on the map from buffer
+    // window.pin.map.insertBefore(window.advert.advert, window.pin.map.querySelector('.map__filters-container'));
+
+    window.pin.map.classList.remove('map--faded');
+    form.classList.remove('ad-form--disabled');
+    window.pin.mainPin.removeEventListener('click', activeForm);
+    isActive = true;
+    return isActive;
   };
 
   // Put a function in constant for way to delete it from a handler
-  var activateForm = function () {
+  var activeForm = function () {
     mousedown(advertFieldsets);
   };
+
 
   // Create function for activating form by pressing Enter
   var onMapPinEnterPress = function (evt) {
     if (evt.keyCode === window.util.ENT_CODE) {
       mousedown(advertFieldsets);
       getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
+      window.pin.mainPin.removeEventListener('keydown', onMapPinEnterPress);
     }
   };
 
@@ -235,6 +243,18 @@
     timein.value = timeout.value;
   });
 
-  window.activateForm = activateForm;
-  window.onMapPinEnterPress = onMapPinEnterPress;
+  form.addEventListener('submit', function (evt) {
+    window.request.upload(new FormData(form), window.request.uploadSuccessHandler, window.request.uploadErrorHandler);
+    evt.preventDefault();
+  });
+
+  window.form = {
+    form: form,
+    MAIN_PIN_X_ACTIVE: MAIN_PIN_X_ACTIVE,
+    MAIN_PIN_Y_ACTIVE: MAIN_PIN_X_ACTIVE,
+    MAIN_PIN_X: MAIN_PIN_X,
+    MAIN_PIN_Y: MAIN_PIN_Y,
+    getAddress: getAddress,
+    mousedown: mousedown
+  };
 })();

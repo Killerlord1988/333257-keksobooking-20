@@ -11,13 +11,13 @@
 
   var advertTemplate = document.querySelector('#card')
     .content.
-    querySelector('.map__card'); // Ищем шаблон обявления для пина карты
+  querySelector('.map__card'); // Ищем шаблон обявления для пина карты
 
   // Создаем объявление на карте из шаблона
   var renderAdvert = function (advertisment) {
     var advertElement = advertTemplate.cloneNode(true);
     advertElement.querySelector('.popup__title').textContent = advertisment.offer.title;
-    // advertElement.querySelector('.popup__text--address').textContent = advertisment.offer.adress;
+    advertElement.querySelector('.popup__text--address').textContent = advertisment.offer.address;
 
     advertElement.querySelector('.popup__text--price').textContent = advertisment.offer.price + ' ₽/ночь';
     advertElement.querySelector('.popup__type').textContent = TRANSLATE_OF_ACCOMODATION[advertisment.offer.type];
@@ -51,12 +51,16 @@
       images.appendChild(imageItem);
     }
 
-    advertElement.querySelector('.popup__avatar').setAttribute('src', advertisment.author);
+    advertElement.querySelector('.popup__avatar').setAttribute('src', advertisment.author.avatar);
 
     // Put on a handler for closing advert
     var buttonPopup = advertElement.querySelector('.popup__close');
     var hidePopup = function () {
-      advertElement.parentNode.removeChild(advertElement);
+      var popup = document.querySelector('.map__card');
+      if (popup) {
+        popup.parentNode.removeChild(popup);
+      }
+      // advertElement.parentNode.removeChild(advertElement);
       document.removeEventListener('keydown', onPopuoCloseEscapePress);
     };
     var onPopuoCloseEscapePress = function (evt) {
@@ -73,16 +77,7 @@
     return advertElement;
   };
 
-  // Создаем буфер куда будем временно копировать объявления
-  var advert = document.createDocumentFragment();
-
-  // Копируем объявление в буфер
-  advert.appendChild(renderAdvert(window.data.accomodations[0]));
-
-
-
   window.advert = {
-    advert: advert,
     renderAdvert: renderAdvert
   };
 })();
