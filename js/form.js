@@ -141,7 +141,7 @@
 
       if (window.pin.mainPin.offsetLeft - shift.x + MAIN_PIN_X_ACTIVE / 2 < 0) {
         startCoords.x = '0px' + MAIN_PIN_X_ACTIVE;
-        return startCoords.x;
+        // return startCoords.x;
 
       } else if (window.pin.mainPin.offsetLeft - shift.x + MAIN_PIN_X_ACTIVE / 2 > window.pin.map.clientWidth) {
         startCoords.x = window.pin.map.clientWidth + 'px';
