@@ -2,8 +2,8 @@
 'use strict';
 (function () {
   // Put a handler on the major pin for click
-  window.pin.mainPin.addEventListener('click', window.activateForm);
+  window.render.mainPin.addEventListener('click', window.activeForm);
 
   // Put a handler on the major pin for keydownn
-  window.pin.mainPin.addEventListener('keydown', window.onMapPinEnterPress);
+  window.render.mainPin.addEventListener('keydown', window.onMapPinEnterPress);
 })();
