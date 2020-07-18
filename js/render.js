@@ -15,7 +15,7 @@
   var deleteAdvert = function () {
     var popup = document.querySelector('.map__card');
     if (popup) {
-      popup.remove();
+      popup.parentNode.removeChild(popup);
     }
   };
 
