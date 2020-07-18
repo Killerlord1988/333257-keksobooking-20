@@ -12,6 +12,13 @@
     .content.
   querySelector('.map__pin'); //  Ищем контент шаблона пина для карты
 
+  var deleteAdvert = function () {
+    var popup = document.querySelector('.map__card');
+    if (popup) {
+      popup.remove();
+    }
+  };
+
   // Создаем метку на карте согласно шаблона
   var renderAccomodation = function (accomodation) {
     var accomodationElement = accomodationTemplate.cloneNode(true);
@@ -60,6 +67,7 @@
     map: map,
     mainPin: mainPin,
     mapPins: mapPins,
+    deleteAdvert: deleteAdvert,
     render: render
   };
 })();
