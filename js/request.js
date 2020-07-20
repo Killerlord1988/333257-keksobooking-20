@@ -89,24 +89,24 @@
 
   var resetForm = function () {
     window.form.form.reset();
+    window.render.mapPins.prepend(window.render.overlay);
     // Find main pin and set it into the first position
-    window.pin.mainPin.setAttribute('style', 'left: 570px; top: 375px;');
+    window.render.mainPin.setAttribute('style', 'left: 570px; top: 375px;');
     window.form.getAddress(window.form.MAIN_PIN_X_ACTIVE, window.form.MAIN_PIN_Y_ACTIVE);
 
     // Return form to an initial view
-    window.pin.map.classList.add('map--faded');
+    window.render.map.classList.add('map--faded');
     window.form.form.classList.add('ad-form--disabled');
     var advertFieldset = window.form.form.querySelectorAll('fieldset');
     advertFieldset.forEach(function (advert) {
       advert.setAttribute('disabled', 'disabled');
     });
 
-    // Find an advert and delete it
-    var advert = window.pin.map.querySelector('.map__card');
-    advert.parentNode.removeChild(advert);
+    // Find an opened advert and close it
+    window.render.deleteAdvert();
 
     // Find pins and delete them from map
-    var pins = window.pin.map.querySelectorAll('.map__pin');
+    var pins = window.render.map.querySelectorAll('.map__pin');
     for (var j = 1; j < pins.length; j++) {
       pins[j].parentNode.removeChild(pins[j]);
     }
@@ -115,11 +115,11 @@
     var onMapPinClick = function () {
       window.form.mousedown(advertFieldset);
       window.form.getAddress(window.form.MAIN_PIN_X_ACTIVE, window.form.MAIN_PIN_Y_ACTIVE);
-      window.pin.mainPin.removeEventListener('click', onMapPinClick);
+      window.render.mainPin.removeEventListener('click', onMapPinClick);
     };
 
     // put the handler on the main pin
-    window.pin.mainPin.addEventListener('click', onMapPinClick);
+    window.render.mainPin.addEventListener('click', onMapPinClick);
   };
 
   // Create function if there is a mistake in an uploading form
