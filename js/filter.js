@@ -41,7 +41,7 @@
   };
 
 
-  var updatePins = function () {
+  var updatePins = window.debounce(function () {
     var activeFeatures = featuresList
       .filter(function (feature) {
         return feature.checked;
@@ -76,7 +76,7 @@
     });
     window.render.deleteAdvert();
     window.render.getPins(temporaryPins);
-  };
+  });
 
   Object.keys(filters).forEach(function (el) {
     filters[el].addEventListener('change', updatePins);
