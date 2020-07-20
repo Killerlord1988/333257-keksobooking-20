@@ -61,7 +61,7 @@
     return accomodationElement;
   };
 
-  var getPins = function (data) {
+  var getPins = window.debounce(function (data) {
     // Создаем буфер куда будем временно копировать маркеры карты
     var fragment = document.createDocumentFragment();
 
@@ -75,7 +75,7 @@
     mapPins.prepend(mainPin);
     // Render pins on the map from buffer
     mapPins.append(fragment);
-  };
+  });
 
 
   window.render = {
