@@ -1,8 +1,6 @@
 // File main.js
 'use strict';
 (function () {
-  var form = document.querySelector('.ad-form');
-
   var DEFAULT_OPTION_IDX = 2;
   var NOT_GUEST_OPTION_IDX = 3;
 
@@ -32,11 +30,28 @@
   var ROOMS = [1, 2, 3, 0];
   var GUESTS = [3, 2, 1, 0];
 
+  var form = document.querySelector('.ad-form');
   var isActive = false;
+  var addressInput = document.querySelector('#address');
 
+  // Find form to ban fieldset be edited
   var advertFieldsets = form.querySelectorAll('fieldset');
+
   var filters = document.querySelectorAll('.map__filters select');
   var featuresList = document.querySelector('#housing-features');
+
+  // Find list of options of rooms
+  var selectRooms = document.querySelector('#room_number');
+  var selectGuests = document.querySelector('#capacity');
+  var optionGuests = selectGuests.querySelectorAll('option');
+
+  // Create function for cleaning data from selected
+  var timein = document.querySelector('#timein');
+  var timeout = document.querySelector('#timeout');
+
+  // Find field of type of accomodation
+  var type = document.querySelector('#type');
+  var price = document.querySelector('#price');
 
   // Create a function for setting 'disabled' on fields of the form
   var setOptionDisabled = function (fields) {
@@ -64,7 +79,6 @@
 
   // Create function to set address in a form
   var getAddress = function (pinX, pinY) {
-    var addressInput = document.querySelector('#address');
     var pointX = parseInt(window.render.mainPin.style.left, 10) + pinX / 2;
     var pointY = null;
 
@@ -85,43 +99,30 @@
   getAddress(MAIN_PIN_X, MAIN_PIN_Y);
 
   // Create function for deleting 'disabled' from each fieldset of the form
-  var mousedown = function (fieldsets) {
-    for (var k = 0; k < fieldsets.length; k++) {
-      var fieldset = fieldsets[k];
-      fieldset.removeAttribute('disabled', 'disabled');
-    }
+  var makeActive = function () {
+    deleteOptionDisabled(advertFieldsets);
+    getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
 
-    // Active filds of the filter
+    // Active fields of the filter
     deleteOptionDisabled(filters);
-    featuresList.removeAttribute('disabled', 'disabled');
+    featuresList.removeAttribute('disabled');
 
     // Render pins on the map from server data
     var server = window.filter;
-    window.request.load(server.successHandler, server.errorHandler);
-
-    // Change сoordinates for pin in the field of address
-    // getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
-
-    // Render advert on the map from buffer
-    // window.pin.map.insertBefore(window.advert.advert, window.pin.map.querySelector('.map__filters-container'));
-
+    window.request.createRequest(server.successHandler, server.errorHandler, window.request.METHODS.get, window.request.URL.load);
     window.render.map.classList.remove('map--faded');
     form.classList.remove('ad-form--disabled');
-    window.render.mainPin.removeEventListener('click', activeForm);
+    // window.render.mainPin.removeEventListener('click', activeForm);
+
     isActive = true;
+
     return isActive;
   };
-
-  // Put a function in constant for way to delete it from a handler
-  var activeForm = function () {
-    mousedown(advertFieldsets);
-  };
-
 
   // Create function for activating form by pressing Enter
   var onMapPinEnterPress = function (evt) {
     if (evt.keyCode === window.util.ENT_CODE) {
-      mousedown(advertFieldsets);
+      makeActive(advertFieldsets);
       getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
       window.render.mainPin.removeEventListener('keydown', onMapPinEnterPress);
     }
@@ -133,7 +134,7 @@
   window.render.mainPin.addEventListener('mousedown', function (evt) {
 
     if (!isActive) {
-      mousedown(advertFieldsets);
+      makeActive();
     }
 
     var Coord = function (x, y) {
@@ -196,11 +197,6 @@
 
   });
 
-  // Find list of options of rooms
-  var selectRooms = document.querySelector('#room_number');
-  var selectGuests = document.querySelector('#capacity');
-  var optionGuests = selectGuests.querySelectorAll('option');
-
   // Put disabled on list of guests to avoid bag with 1 room and 1 guest when the page
   // will be opened without changing amount of rooms
   setOptionDisabled(optionGuests);
@@ -233,13 +229,9 @@
     getAvailableGuests();
   });
 
-  // Find field of type of accomodation
-  var type = document.querySelector('#type');
-
   // Create a function for defining min price for type of accomodation
   var getMinPriceOfAccomodation = function () {
     var typyOptions = type.querySelectorAll('option');
-    var price = document.querySelector('#price');
     var index = type.selectedIndex;
     price.setAttribute('min', MINPRICE_OF_ACCOMODATION[typyOptions[index].value]);
     price.setAttribute('placeholder', MINPRICE_OF_ACCOMODATION[typyOptions[index].value]);
@@ -250,9 +242,6 @@
     getMinPriceOfAccomodation();
   });
 
-  var timein = document.querySelector('#timein');
-  var timeout = document.querySelector('#timeout');
-
   timein.addEventListener('change', function () {
     timeout.value = timein.value;
   });
@@ -262,17 +251,20 @@
   });
 
   form.addEventListener('submit', function (evt) {
-    window.request.upload(new FormData(form), window.request.uploadSuccessHandler, window.request.uploadErrorHandler);
+    window.request.createRequest(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.METHODS.post, window.request.URL.upload, new FormData(form));
     evt.preventDefault();
   });
 
   window.form = {
-    form: form,
     MAIN_PIN_X_ACTIVE: MAIN_PIN_X_ACTIVE,
     MAIN_PIN_Y_ACTIVE: MAIN_PIN_X_ACTIVE,
     MAIN_PIN_X: MAIN_PIN_X,
     MAIN_PIN_Y: MAIN_PIN_Y,
     getAddress: getAddress,
-    mousedown: mousedown
+    makeActive: makeActive,
+    setOptionDisabled: setOptionDisabled,
+    advertFieldsets: advertFieldsets,
+    filters: filters,
+    optionGuests: optionGuests
   };
 })();
