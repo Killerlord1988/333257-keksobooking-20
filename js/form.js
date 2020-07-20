@@ -136,44 +136,47 @@
       mousedown(advertFieldsets);
     }
 
-    var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY
+    var Coord = function (x, y) {
+      this.x = x;
+      this.y = y;
     };
+
+    var startCoords = new Coord(evt.clientX, evt.clientY);
 
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
+      getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
 
-      var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY
-      };
+      var coordX = startCoords.x - moveEvt.clientX;
+      var coordY = startCoords.y - moveEvt.clientY;
 
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-      };
+      var shift = new Coord(coordX, coordY);
 
-      if (window.render.mainPin.offsetLeft - shift.x + MAIN_PIN_X_ACTIVE / 2 < 0) {
+      startCoords = new Coord(moveEvt.clientX, moveEvt.clientY);
+
+      var offsetLeft = window.render.mainPin.offsetLeft;
+      var offsetTop = window.render.mainPin.offsetTop;
+
+      if (offsetLeft - shift.x + MAIN_PIN_X_ACTIVE / 2 < 0) {
         startCoords.x = '0px' + MAIN_PIN_X_ACTIVE;
-        // return startCoords.x;
+        return startCoords.x;
 
-      } else if (window.render.mainPin.offsetLeft - shift.x + MAIN_PIN_X_ACTIVE / 2 > window.render.map.clientWidth) {
+      } else if (offsetLeft - shift.x + MAIN_PIN_X_ACTIVE / 2 > window.render.map.clientWidth) {
         startCoords.x = window.render.map.clientWidth + 'px';
         return startCoords.x;
       }
 
-      if (window.render.mainPin.offsetTop - shift.y + MAIN_PIN_Y_ACTIVE > COORD_Y.max) {
+      if (offsetTop - shift.y + MAIN_PIN_Y_ACTIVE > COORD_Y.max) {
         startCoords.y = COORD_Y.max + 'px';
         return startCoords.y;
 
-      } else if (window.render.mainPin.offsetTop - shift.y + MAIN_PIN_Y_ACTIVE / 2 < COORD_Y.min) {
+      } else if (offsetTop - shift.y + MAIN_PIN_Y_ACTIVE / 2 < COORD_Y.min) {
         startCoords.y = COORD_Y.min + 'px';
         return startCoords.y;
       }
 
-      window.render.mainPin.style.top = (window.render.mainPin.offsetTop - shift.y) + 'px';
-      window.render.mainPin.style.left = (window.render.mainPin.offsetLeft - shift.x) + 'px';
+      window.render.mainPin.style.top = (offsetTop - shift.y) + 'px';
+      window.render.mainPin.style.left = (offsetLeft - shift.x) + 'px';
 
       return '1'; // eslint error
     };
