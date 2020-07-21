@@ -2,17 +2,17 @@
 'use strict';
 
 (function () {
-  var ACCOMODATIONS = 8; // Количество объявлений
+  var ACCOMODATIONS = 8; // Count advert
   var TYPE_OF_ACCOMODATION = ['palace', 'flat', 'house', 'bungalo'];
-  var SCHEDULE = ['12:00', '13:00', '14:00']; // Время заезда - выезда
+  var SCHEDULE = ['12:00', '13:00', '14:00']; // Check-in - Check-out time
   var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator',
     'conditioner'
-  ]; // Удобства
+  ]; // Facilities
   var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg']; // Фотографии отеля
 
-  var locationX = document.querySelector('.map__overlay').clientWidth; // Находим ширину карты для границ отрисовки пинов по оси Х
+  var locationX = document.querySelector('.map__overlay').clientWidth; // Finding the width of the map for the borders of drawing pins along the X axis
 
-  // Шаблон массива с объявлением
+  // Template with declaration
   var getAccomodations = function (amount) {
     var accomodation = [];
     for (var i = 0; i < amount; i++) {

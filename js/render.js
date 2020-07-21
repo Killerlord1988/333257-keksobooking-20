@@ -2,8 +2,8 @@
 'use strict';
 
 (function () {
-  var MAP_PIN_X = 50; // Ширина метки на карте
-  var MAP_PIN_Y = 70; // Высота метки на карте
+  var MAP_PIN_X = 50; // Map mark width
+  var MAP_PIN_Y = 70; // Map mark height
   var AMOUNT_OF_ADVERT = 5;
 
   var map = document.querySelector('.map');
@@ -12,7 +12,7 @@
   var mapPins = document.querySelector('.map__pins');
   var accomodationTemplate = document.querySelector('#pin')
     .content.
-  querySelector('.map__pin'); //  Ищем контент шаблона пина для карты
+  querySelector('.map__pin'); // Finding the content of the map pin template
 
   var deleteAdvert = function () {
     var popup = document.querySelector('.map__card');
@@ -35,7 +35,7 @@
     setActivePin(mainPin);
   });
 
-  // Создаем метку на карте согласно шаблона
+  // Create a placemark on the map according to the template
   var renderAccomodation = function (accomodation) {
     var accomodationElement = accomodationTemplate.cloneNode(true);
 
@@ -62,11 +62,11 @@
   };
 
   var getPins = window.debounce(function (data) {
-    // Создаем буфер куда будем временно копировать маркеры карты
+    // Create a buffer where we will temporarily copy map markers
     var fragment = document.createDocumentFragment();
 
     var takeNumber = data.length > AMOUNT_OF_ADVERT ? AMOUNT_OF_ADVERT : data.length;
-    // Копируем метки в буфер
+    // Copy labels to clipboard
     for (var i = 0; i < takeNumber; i++) {
       fragment.prepend(renderAccomodation(data[i]));
     }
@@ -77,9 +77,7 @@
     mapPins.append(fragment);
   });
 
-
   window.render = {
-    renderAccomodation: renderAccomodation,
     map: map,
     mainPin: mainPin,
     mapPins: mapPins,

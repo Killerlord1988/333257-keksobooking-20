@@ -40,7 +40,6 @@
     return typeOfPrice;
   };
 
-
   var updatePins = function () {
     var activeFeatures = featuresList
       .filter(function (feature) {
@@ -82,7 +81,6 @@
     filters[el].addEventListener('change', updatePins);
   });
 
-
   // Callback for rendering pins from server data
   var successHandler = function (data) {
     pins = data;
@@ -91,6 +89,7 @@
 
   // Callback for showing a error message if data isn't loaded from server
   var errorHandler = function () {
+
     // Add the pattern in DOM
     document.body.prepend(window.request.error);
   };

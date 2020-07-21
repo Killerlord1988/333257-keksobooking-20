@@ -91,10 +91,6 @@
     addressInput.setAttribute('value', roundedNumber(pointX) + ', ' + roundedNumber(pointY));
   };
 
-  // var removeClass = function (node, className) {
-  //   node.classList.remove(className);
-  // };
-
   // Set address on the inactive map
   getAddress(MAIN_PIN_X, MAIN_PIN_Y);
 
@@ -112,7 +108,6 @@
     window.request.createRequest(server.successHandler, server.errorHandler, window.request.METHODS.get, window.request.URL.load);
     window.render.map.classList.remove('map--faded');
     form.classList.remove('ad-form--disabled');
-    // window.render.mainPin.removeEventListener('click', activeForm);
 
     isActive = true;
 
@@ -130,7 +125,6 @@
 
   // Put a handler on the major pin for keydownn
   window.render.mainPin.addEventListener('keydown', onMapPinEnterPress);
-
   window.render.mainPin.addEventListener('mousedown', function (evt) {
 
     if (!isActive) {

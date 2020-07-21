@@ -2,15 +2,15 @@
 'use strict';
 
 (function () {
-  // Словарь типов имущества
-  var TRANSLATE_OF_ACCOMODATION = { // Словарь типов имущества
+  //Property type dictionary
+  var TRANSLATE_OF_ACCOMODATION = {
     bungalo: 'Бунгало',
     flat: 'Квартира',
     house: 'Дом',
     palace: 'Дворец'
   };
 
-  // Ищем шаблон обявления для пина карты
+  // Search template advert for a pin card
   var advertTemplate = document.querySelector('#card')
     .content.
   querySelector('.map__card'); // Ищем шаблон обявления для пина карты
@@ -44,7 +44,7 @@
     return list;
   };
 
-  // Создаем объявление на карте из шаблона
+  // Create advert on a map from a template
   var createAdElement = function (pattern, avatar) {
     advertElement.querySelector('.popup__title').textContent = pattern.title;
     advertElement.querySelector('.popup__text--address').textContent = pattern.address;
@@ -61,10 +61,10 @@
   var render = function (advertisment) {
     createAdElement(advertisment.offer, advertisment.author.avatar);
 
-    // Добавляем удобства на карточку объявления исходя из рандомного
+    // Add convenience to the ad card based on random
     addFeatures(advertisment.offer.features);
 
-    // Добавляем фото на карточку объявления исходя из рандомного массива
+    // Add a photo to the ad card based on a random array
     addImages(advertisment.offer.photos);
 
     // Put on a handler for closing advert

@@ -6,20 +6,20 @@
     ENT_CODE: 13, // Keycode of enter button
     ECS_CODE: 27, // Keycode of escape button
 
-    // Генерация рандомного массива
+    // Generating a random array
     getRandomData: function (dataSet) {
 
-      // Генерируем рандомную длинну массива
+      // Generating a random array length
       var randomNumber = this.getRandomFloat(0, dataSet.length);
       var data = [];
-      // Записываем в рандомный массив данные из массива переданного в параметр
+      // Write data from the array passed to the parameter into a random array
       for (var key = 0; key < randomNumber; key++) {
         data.push(dataSet[key]);
       }
       return data;
     },
 
-    // Создаем функцию для генерации случайного числа от min до max
+    // Create a function to generate a random number from min to max
     getRandomFloat: function (min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
