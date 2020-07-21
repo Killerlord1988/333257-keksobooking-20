@@ -2,7 +2,7 @@
 'use strict';
 
 (function () {
-  //Property type dictionary
+  // Property type dictionary
   var TRANSLATE_OF_ACCOMODATION = {
     bungalo: 'Бунгало',
     flat: 'Квартира',
