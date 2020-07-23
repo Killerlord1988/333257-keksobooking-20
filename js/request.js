@@ -108,12 +108,12 @@
 
     // reset filters on default state
 
-    var resetFilter = function(obj) {
+    var resetFilter = function (obj) {
       Object.keys(obj).forEach(function (el) {
         obj[el].selectedIndex = 0;
         obj[el].checked = false;
       });
-    }
+    };
     resetFilter(window.filter.filters);
     resetFilter(window.filter.filterFeatures);
   };
