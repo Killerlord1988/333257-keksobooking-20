@@ -7,6 +7,10 @@
     post: 'POST'
   };
   var SUCCESS_CODE = 200;
+  var AVATAR_SIZE = {
+    width: '40',
+    height: '44'
+  };
 
   var URL = {
     load: 'https://javascript.pages.academy/keksobooking/data',
@@ -51,6 +55,23 @@
     }
   };
 
+  var deletePhoto = function (container) {
+    container.innerHTML = '';
+  };
+
+  var clearSrcImage = function (image) {
+    image.src = 'img/muffin-grey.svg';
+    image.width = AVATAR_SIZE.width;
+    image.height = AVATAR_SIZE.height;
+  };
+
+  clearFormButton.addEventListener('click', function () {
+    var avatar = document.querySelector('.ad-form-header__preview img');
+    resetForm();
+    deletePhoto(window.avatar.adContainer);
+    clearSrcImage(avatar);
+  });
+
   var resetForm = function () {
     form.reset();
     window.render.mapPins.prepend(window.render.overlay);
@@ -84,6 +105,7 @@
 
     // put the handler on the main pin
     window.render.mainPin.addEventListener('click', onMapPinClick);
+
   };
 
   // Create function if there is a mistake in an uploading form
@@ -120,6 +142,7 @@
 
   //
   var uploadSuccessHandler = function () {
+    var avatar = document.querySelector('.ad-form-header__preview img');
     // Add the pattern in DOM
     document.body.querySelector('main').prepend(success);
     var messageSuccess = document.body.querySelector('main .success');
@@ -144,9 +167,9 @@
     document.addEventListener('keydown', onFormSuccessEscapePress);
 
     resetForm();
+    deletePhoto(window.avatar.adContainer);
+    clearSrcImage(avatar);
   };
-
-  clearFormButton.addEventListener('click', resetForm);
 
   window.request = {
     uploadErrorHandler: uploadErrorHandler,
