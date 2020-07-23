@@ -13,6 +13,7 @@
   };
 
   var featuresList = Array.from(filters.features.querySelectorAll('input'));
+  var filterFeatures = document.querySelectorAll('input[name=features]');
 
   // Copy data which was got from the server
   var pins = [];
@@ -97,6 +98,7 @@
   window.filter = {
     successHandler: successHandler,
     errorHandler: errorHandler,
-    filters: filters
+    filters: filters,
+    filterFeatures: filterFeatures
   };
 })();

@@ -105,6 +105,17 @@
 
     // put the handler on the main pin
     window.render.mainPin.addEventListener('click', onMapPinClick);
+
+    // reset filters on default state
+
+    var resetFilter = function(obj) {
+      Object.keys(obj).forEach(function (el) {
+        obj[el].selectedIndex = 0;
+        obj[el].checked = false;
+      });
+    }
+    resetFilter(window.filter.filters);
+    resetFilter(window.filter.filterFeatures);
   };
 
   // Create function if there is a mistake in an uploading form
