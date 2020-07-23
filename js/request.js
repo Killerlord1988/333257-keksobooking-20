@@ -60,6 +60,9 @@
   };
 
   var clearSrcImage = function (image) {
+    var preview = document.querySelector('.ad-form-header__preview');
+    preview.style.paddingLeft = '15px';
+    preview.style.paddingRight = '15px';
     image.src = 'img/muffin-grey.svg';
     image.width = AVATAR_SIZE.width;
     image.height = AVATAR_SIZE.height;

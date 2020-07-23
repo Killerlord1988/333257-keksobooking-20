@@ -26,6 +26,7 @@
   };
 
   var attachPhoto = function (chooser, container) {
+
     chooser.addEventListener('change', function () {
       var file = chooser.files;
       if (file) {
@@ -38,6 +39,7 @@
             var reader = new FileReader();
             reader.addEventListener('load', function () {
               addImg(reader.result, container);
+              preview.style.padding = '0';
             });
             reader.readAsDataURL(file[key]);
           }
