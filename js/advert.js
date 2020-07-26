@@ -69,7 +69,7 @@
 
     // Put on a handler for closing advert
     var onPopuoCloseEscapePress = function (evt) {
-      if (evt.keyCode === window.util.ECS_CODE) {
+      if (evt.key === window.util.ESC_KEY) {
         window.render.deleteAdvert();
         document.removeEventListener('keydown', onPopuoCloseEscapePress);
       }

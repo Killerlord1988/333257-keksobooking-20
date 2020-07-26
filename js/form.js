@@ -116,7 +116,7 @@
 
   // Create function for activating form by pressing Enter
   var onMapPinEnterPress = function (evt) {
-    if (evt.keyCode === window.util.ENT_CODE) {
+    if (evt.key === window.util.ENT_KEY) {
       makeActive(advertFieldsets);
       getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
       window.render.mainPin.removeEventListener('keydown', onMapPinEnterPress);
@@ -225,10 +225,11 @@
 
   // Create a function for defining min price for type of accomodation
   var getMinPriceOfAccomodation = function () {
-    var typyOptions = type.querySelectorAll('option');
+    var typeOptions = type.querySelectorAll('option');
     var index = type.selectedIndex;
-    price.setAttribute('min', MINPRICE_OF_ACCOMODATION[typyOptions[index].value]);
-    price.setAttribute('placeholder', MINPRICE_OF_ACCOMODATION[typyOptions[index].value]);
+    price.setAttribute('min', MINPRICE_OF_ACCOMODATION[typeOptions[index].value]);
+    price.setAttribute('placeholder', MINPRICE_OF_ACCOMODATION[typeOptions[index].value]);
+    price.value = MINPRICE_OF_ACCOMODATION[typeOptions[index].value];
   };
 
   // Put on a handler if type of accomodation is changed
@@ -257,6 +258,7 @@
     getAddress: getAddress,
     makeActive: makeActive,
     setOptionDisabled: setOptionDisabled,
+    getMinPriceOfAccomodation: getMinPriceOfAccomodation,
     advertFieldsets: advertFieldsets,
     filters: filters,
     optionGuests: optionGuests

@@ -3,8 +3,8 @@
 
 (function () {
   window.util = {
-    ENT_CODE: 13, // Keycode of enter button
-    ECS_CODE: 27, // Keycode of escape button
+    ENT_KEY: 'Enter', // Keycode of enter button
+    ESC_KEY: 'Escape', // Keycode of escape button
 
     // Generating a random array
     getRandomData: function (dataSet) {

@@ -73,6 +73,7 @@
     deletePhoto(window.avatar.adContainer);
     clearSrcImage(avatar);
     form.reset();
+    window.form.getMinPriceOfAccomodation();
 
     window.render.mapPins.prepend(window.render.overlay);
     // Find main pin and set it into the first position
@@ -107,7 +108,6 @@
     window.render.mainPin.addEventListener('click', onMapPinClick);
 
     // reset filters on default state
-
     var resetFilter = function (obj) {
       Object.keys(obj).forEach(function (el) {
         obj[el].selectedIndex = 0;
@@ -135,7 +135,7 @@
 
     // Create callback to delete message by press Escape
     var onFormErrorEscapePress = function (evt) {
-      if (evt.keyCode === window.util.ECS_CODE) {
+      if (evt.key === window.util.ESC_KEY) {
         messageError.parentNode.removeChild(messageError);
         document.removeEventListener('keydown', onFormErrorEscapePress);
         document.removeEventListener('click', onFormErrorButton);
@@ -158,17 +158,17 @@
 
     // Create callback to delete message by click
     var onFormSuccessWindow = function () {
-      messageSuccess.remove();
+      messageSuccess.parentNode.removeChild(messageSuccess);
       document.removeEventListener('click', onFormSuccessWindow);
       document.removeEventListener('keydown', onFormSuccessEscapePress);
     };
 
     // Create callback to delete message by press Escape
     var onFormSuccessEscapePress = function (evt) {
-      if (evt.keyCode === window.util.ECS_CODE) {
-        messageSuccess.remove();
-        document.removeEventListener('keydown', onFormSuccessEscapePress);
+      if (evt.key === window.util.ESC_KEY) {
+        messageSuccess.parentNode.removeChild(messageSuccess);
         document.removeEventListener('click', onFormSuccessWindow);
+        document.removeEventListener('keydown', onFormSuccessEscapePress);
       }
     };
 
