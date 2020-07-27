@@ -244,7 +244,7 @@
     timein.value = timeout.value;
   });
 
-  // change filtrs on press Enter
+  // change filters on press Enter
   filtersCheckbox.forEach(function (checkbox) {
     checkbox.addEventListener('keydown', function (evt) {
       if (evt.key === window.util.ENT_KEY) {
