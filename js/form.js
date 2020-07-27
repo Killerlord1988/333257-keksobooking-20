@@ -205,14 +205,14 @@
         if (GUESTS[j] === dataGuests[k]) {
           guestsCountOptions[j].removeAttribute('disabled', 'disabled');
         }
-
-        // Selecting one guest to avoid validation errors
-        if (selectedRoom < dataGuests.length) {
-          guestsCountSelect.selectedIndex = DEFAULT_OPTION_IDX;
-        } else {
-          guestsCountSelect.selectedIndex = NOT_GUEST_OPTION_IDX;
-        }
       }
+    }
+
+    // Selecting one guest to avoid validation errors
+    if (selectedRoom < dataGuests.length) {
+      guestsCountSelect.selectedIndex = DEFAULT_OPTION_IDX;
+    } else {
+      guestsCountSelect.selectedIndex = NOT_GUEST_OPTION_IDX;
     }
   };
 
