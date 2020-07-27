@@ -4,10 +4,10 @@
   var DEFAULT_OPTION_IDX = 2;
   var NOT_GUEST_OPTION_IDX = 3;
 
-  var MAIN_PIN_X = 65;
-  var MAIN_PIN_Y = 65;
-  var MAIN_PIN_X_ACTIVE = 65;
-  var MAIN_PIN_Y_ACTIVE = 81;
+  var MAIN_PIN_X = 64;
+  var MAIN_PIN_Y = 64;
+  var MAIN_PIN_X_ACTIVE = 64;
+  var MAIN_PIN_Y_ACTIVE = 84;
   var COORD_Y = {
     min: 130,
     max: 630
@@ -165,7 +165,7 @@
         startCoords.y = COORD_Y.max + 'px';
         return startCoords.y;
 
-      } else if (offsetTop - shift.y + MAIN_PIN_Y_ACTIVE / 2 < COORD_Y.min) {
+      } else if (offsetTop - shift.y + MAIN_PIN_Y_ACTIVE / 2 < COORD_Y.min - MAIN_PIN_Y_ACTIVE / 2) {
         startCoords.y = COORD_Y.min + 'px';
         return startCoords.y;
       }
