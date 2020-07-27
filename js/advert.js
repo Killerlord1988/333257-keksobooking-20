@@ -74,20 +74,20 @@
     };
 
     // Put on a handler for closing advert
-    var onPopuoCloseEscapePress = function (evt) {
+    var onPopupCloseEscapePress = function (evt) {
       if (evt.key === window.util.ESC_KEY) {
         deleteActivePinClass();
         window.render.deleteAdvert();
-        document.removeEventListener('keydown', onPopuoCloseEscapePress);
+        document.removeEventListener('keydown', onPopupCloseEscapePress);
       }
     };
 
     buttonPopup.addEventListener('click', function () {
       deleteActivePinClass();
       window.render.deleteAdvert();
-      document.removeEventListener('keydown', onPopuoCloseEscapePress);
+      document.removeEventListener('keydown', onPopupCloseEscapePress);
     });
-    document.addEventListener('keydown', onPopuoCloseEscapePress);
+    document.addEventListener('keydown', onPopupCloseEscapePress);
 
     return advertElement;
   };

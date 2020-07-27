@@ -73,7 +73,7 @@
   setOptionDisabled(filters);
   featuresList.setAttribute('disabled', 'disabled');
 
-  var roundedNumber = function (number) {
+  var roundNumber = function (number) {
     return '' + number.toFixed(0);
   };
 
@@ -88,7 +88,7 @@
       pointY = parseInt(window.render.mainPin.style.top, 10) + pinY;
     }
 
-    addressInput.setAttribute('value', roundedNumber(pointX) + ', ' + roundedNumber(pointY));
+    addressInput.setAttribute('value', roundNumber(pointX) + ', ' + roundNumber(pointY));
   };
 
   // Set address on the inactive map
