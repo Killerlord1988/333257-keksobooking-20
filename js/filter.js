@@ -12,7 +12,7 @@
     features: document.querySelector('#housing-features')
   };
 
-  var featuresList = Array.from(filtersBlock.features.querySelectorAll('input'));
+  var featuresLists = Array.from(filtersBlock.features.querySelectorAll('input'));
   var filterFeatures = document.querySelectorAll('input[name=features]');
 
   // Copy data which was got from the server
@@ -42,7 +42,7 @@
   };
 
   var updatePins = function () {
-    var activeFeatures = featuresList
+    var activeFeatures = featuresLists
       .filter(function (feature) {
         return feature.checked;
       })

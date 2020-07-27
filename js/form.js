@@ -43,7 +43,7 @@
   // Find list of options of rooms
   var roomsCountSelect = document.querySelector('#room_number');
   var guestsCountSelect = document.querySelector('#capacity');
-  var optionGuests = guestsCountSelect.querySelectorAll('option');
+  var guestsCountOptions = guestsCountSelect.querySelectorAll('option');
 
   // Create function for cleaning data from selected
   var timein = document.querySelector('#timein');
@@ -193,19 +193,19 @@
 
   // Put disabled on list of guests to avoid bag with 1 room and 1 guest when the page
   // will be opened without changing amount of rooms
-  setOptionDisabled(optionGuests);
-  optionGuests[2].removeAttribute('disabled', 'disabled');
+  setOptionDisabled(guestsCountOptions);
+  guestsCountOptions[2].removeAttribute('disabled', 'disabled');
 
   // Create a function to cansel disabled on option for choosing guests
   var getAvailableGuests = function () {
-    setOptionDisabled(optionGuests);
+    setOptionDisabled(guestsCountOptions);
     var selectedRoom = roomsCountSelect.selectedIndex;
     var dataGuests = ROOMS_GUESTS_RELATION[ROOMS[selectedRoom]];
 
     for (var j = 0; j < GUESTS.length; j++) {
       for (var k = 0; k < dataGuests.length; k++) {
         if (GUESTS[j] === dataGuests[k]) {
-          optionGuests[j].removeAttribute('disabled', 'disabled');
+          guestsCountOptions[j].removeAttribute('disabled', 'disabled');
         }
 
         // Selecting one guest to avoid validation errors
@@ -261,6 +261,6 @@
     getMinPriceOfAccomodation: getMinPriceOfAccomodation,
     advertFieldsets: advertFieldsets,
     filters: filters,
-    optionGuests: optionGuests
+    guestsCountOptions: guestsCountOptions
   };
 })();

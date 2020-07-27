@@ -19,13 +19,13 @@
   var imagesBlock = advertElement.querySelector('.popup__photos');
   var list = advertElement.querySelector('.popup__features');
 
-  var addImages = function (array) {
+  var addImages = function (items) {
     imagesBlock.innerHTML = '';
-    for (var i = 0; i < array.length; i++) {
+    for (var i = 0; i < items.length; i++) {
       var imageItem = document.createElement('img');
       imageItem.classList.add('popup__photo');
 
-      imageItem.src = array[i];
+      imageItem.src = items[i];
       imageItem.width = '45';
       imageItem.height = '40';
       imageItem.alt = 'Фотография жилья' + ' ' + (i + 1);
@@ -34,11 +34,11 @@
     return imagesBlock;
   };
 
-  var addFeatures = function (array) {
+  var addFeatures = function (items) {
     list.innerHTML = '';
-    for (var i = 0; i < array.length; i++) {
+    for (var i = 0; i < items.length; i++) {
       var listItem = document.createElement('li');
-      listItem.classList.add('popup__feature--' + array[i], 'popup__feature');
+      listItem.classList.add('popup__feature--' + items[i], 'popup__feature');
       list.prepend(listItem);
     }
     return list;
