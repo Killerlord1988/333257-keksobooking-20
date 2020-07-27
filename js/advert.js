@@ -18,7 +18,7 @@
   // Search template advert for a pin card
   var advertTemplate = document.querySelector('#card')
     .content.
-  querySelector('.map__card'); // Ищем шаблон обявления для пина карты
+  querySelector('.map__card'); // search for an advert template for a pin card
   var advertElement = advertTemplate.cloneNode(true);
   var buttonPopup = advertElement.querySelector('.popup__close');
   var imagesBlock = advertElement.querySelector('.popup__photos');

@@ -39,6 +39,7 @@
 
   var filters = document.querySelectorAll('.map__filters select');
   var featuresList = document.querySelector('#housing-features');
+  var filtersCheckbox = document.querySelectorAll('input[type="checkbox"');
 
   // Find list of options of rooms
   var roomsCountSelect = document.querySelector('#room_number');
@@ -241,6 +242,16 @@
 
   timeout.addEventListener('change', function () {
     timein.value = timeout.value;
+  });
+
+  // change filtrs on press Enter
+  filtersCheckbox.forEach(function (checkbox) {
+    checkbox.addEventListener('keydown', function (evt) {
+      if (evt.key === window.util.ENT_KEY) {
+        var isChecked = evt.target.checked;
+        evt.target.checked = !isChecked;
+      }
+    });
   });
 
   form.addEventListener('submit', function (evt) {
