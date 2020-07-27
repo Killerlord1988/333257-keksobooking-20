@@ -14,10 +14,10 @@
   };
 
   var MinpriceOfAccomodation = {
-    bungalo: 0,
-    flat: 1000,
-    house: 5000,
-    palace: 10000
+    BUNGALO: 0,
+    FLAT: 1000,
+    HOUSE: 5000,
+    PALACE: 10000
   };
 
   var RoomsGuestsRelation = {
@@ -226,9 +226,8 @@
   var getMinPriceOfAccomodation = function () {
     var typeOptions = type.querySelectorAll('option');
     var index = type.selectedIndex;
-    price.setAttribute('min', MinpriceOfAccomodation[typeOptions[index].value]);
-    price.setAttribute('placeholder', MinpriceOfAccomodation[typeOptions[index].value]);
-    price.value = MinpriceOfAccomodation[typeOptions[index].value];
+    price.setAttribute('min', MinpriceOfAccomodation[typeOptions[index].value.toUpperCase()]);
+    price.setAttribute('placeholder', MinpriceOfAccomodation[typeOptions[index].value.toUpperCase()]);
   };
 
   // Put on a handler if type of accomodation is changed
