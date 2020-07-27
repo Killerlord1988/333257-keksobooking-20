@@ -16,7 +16,7 @@
   var getAccomodations = function (amount) {
     var accomodation = [];
     for (var i = 0; i < amount; i++) {
-      var characteristics = {
+      var characteriscticsObject = {
         author: 'img/avatars/user0' + (i + 1) + '.png',
         offer: {
           title: 'Сдам в аренду ...',
@@ -36,7 +36,7 @@
           y: window.util.getRandomFloat(130 + 81, 630) // 81 it's height of a pin
         }
       };
-      accomodation[i] = characteristics;
+      accomodation[i] = characteriscticsObject;
     }
     return accomodation;
   };

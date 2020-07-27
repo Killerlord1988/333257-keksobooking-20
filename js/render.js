@@ -9,7 +9,7 @@
   var map = document.querySelector('.map');
   var overlay = document.querySelector('.map__overlay');
   var mainPin = map.querySelector('.map__pin--main'); // Find major pin in the code
-  var mapPins = document.querySelector('.map__pins');
+  var mapPinsContainer = document.querySelector('.map__pins');
   var accomodationTemplate = document.querySelector('#pin')
     .content.
   querySelector('.map__pin'); // Finding the content of the map pin template
@@ -71,16 +71,16 @@
       fragment.prepend(renderAccomodation(data[i]));
     }
 
-    mapPins.innerHTML = '';
-    mapPins.prepend(mainPin);
+    mapPinsContainer.innerHTML = '';
+    mapPinsContainer.prepend(mainPin);
     // Render pins on the map from buffer
-    mapPins.append(fragment);
+    mapPinsContainer.append(fragment);
   });
 
   window.render = {
     map: map,
     mainPin: mainPin,
-    mapPins: mapPins,
+    mapPinsContainer: mapPinsContainer,
     getPins: getPins,
     deleteAdvert: deleteAdvert,
     overlay: overlay

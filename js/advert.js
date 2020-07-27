@@ -16,11 +16,11 @@
   querySelector('.map__card'); // Ищем шаблон обявления для пина карты
   var advertElement = advertTemplate.cloneNode(true);
   var buttonPopup = advertElement.querySelector('.popup__close');
-  var images = advertElement.querySelector('.popup__photos');
+  var imagesBlock = advertElement.querySelector('.popup__photos');
   var list = advertElement.querySelector('.popup__features');
 
   var addImages = function (array) {
-    images.innerHTML = '';
+    imagesBlock.innerHTML = '';
     for (var i = 0; i < array.length; i++) {
       var imageItem = document.createElement('img');
       imageItem.classList.add('popup__photo');
@@ -29,9 +29,9 @@
       imageItem.width = '45';
       imageItem.height = '40';
       imageItem.alt = 'Фотография жилья' + ' ' + (i + 1);
-      images.append(imageItem);
+      imagesBlock.append(imageItem);
     }
-    return images;
+    return imagesBlock;
   };
 
   var addFeatures = function (array) {

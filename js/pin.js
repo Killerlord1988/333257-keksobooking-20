@@ -14,14 +14,14 @@
   };
 
   // Find all selects and inputs
-  var typeOfHouse = document.querySelector('#housing-type');
-  var price = document.querySelector('#housing-price');
-  var rooms = document.querySelector('#housing-rooms');
-  var guests = document.querySelector('#housing-guests');
-  var features = document.querySelector('#housing-features');
+  var typeOfHouseSelect = document.querySelector('#housing-type');
+  var priceSelect = document.querySelector('#housing-price');
+  var roomsSelect = document.querySelector('#housing-rooms');
+  var guestsSelect = document.querySelector('#housing-guests');
+  var featuresSelect = document.querySelector('#housing-features');
 
   // Put a handler on inputs of features
-  features.addEventListener('change', function (evt) {
+  featuresSelect.addEventListener('change', function (evt) {
     window.render.deleteAdvert();
     var value = evt.target.value;
 
@@ -35,22 +35,22 @@
   });
 
   // Put handlers on selects of the filter
-  typeOfHouse.addEventListener('change', function (evt) {
+  typeOfHouseSelect.addEventListener('change', function (evt) {
     window.render.deleteAdvert();
     var value = evt.target.value;
     pin.onAccomodationChange(value);
   });
-  price.addEventListener('change', function (evt) {
+  priceSelect.addEventListener('change', function (evt) {
     window.render.deleteAdvert();
     var value = evt.target.value;
     pin.onPriceChange(value);
   });
-  rooms.addEventListener('change', function (evt) {
+  roomsSelect.addEventListener('change', function (evt) {
     window.render.deleteAdvert();
     var value = evt.target.value;
     pin.onRoomsChange(value);
   });
-  guests.addEventListener('change', function (evt) {
+  guestsSelect.addEventListener('change', function (evt) {
     window.render.deleteAdvert();
     var value = evt.target.value;
     pin.onGuestsChange(value);

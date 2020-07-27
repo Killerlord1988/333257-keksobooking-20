@@ -4,7 +4,7 @@
 (function () {
   var DEFAULT_FILTER = 'any';
 
-  var filters = {
+  var filtersBlock = {
     type: document.querySelector('#housing-type'),
     price: document.querySelector('#housing-price'),
     rooms: document.querySelector('#housing-rooms'),
@@ -12,14 +12,14 @@
     features: document.querySelector('#housing-features')
   };
 
-  var featuresList = Array.from(filters.features.querySelectorAll('input'));
+  var featuresList = Array.from(filtersBlock.features.querySelectorAll('input'));
   var filterFeatures = document.querySelectorAll('input[name=features]');
 
   // Copy data which was got from the server
   var pins = [];
 
   // Create a dictionary for getting a range of price
-  var prices = {
+  var pricesBlock = {
     'middle': {
       min: 10000,
       max: 50000
@@ -31,11 +31,11 @@
   // Create a function to get a name of a range of a price
   var getRangePrice = function (cost) {
     var typeOfPrice;
-    if (cost <= prices.low) {
+    if (cost <= pricesBlock.low) {
       typeOfPrice = 'low';
-    } else if (cost >= prices.middle.min && cost <= prices.middle.max) {
+    } else if (cost >= pricesBlock.middle.min && cost <= pricesBlock.middle.max) {
       typeOfPrice = 'middle';
-    } else if (cost > prices.high) {
+    } else if (cost > pricesBlock.high) {
       typeOfPrice = 'high';
     }
     return typeOfPrice;
@@ -51,7 +51,7 @@
       });
 
     var temporaryPins = pins.filter(function (pin) {
-      return Object.keys(filters).every(function (key) {
+      return Object.keys(filtersBlock).every(function (key) {
         if (key === 'features') {
           if (activeFeatures.length) {
             return activeFeatures.every(function (feature) {
@@ -60,7 +60,7 @@
           }
           return true;
         } else {
-          var value = filters[key].value;
+          var value = filtersBlock[key].value;
 
           if (value === DEFAULT_FILTER) {
             return true;
@@ -78,8 +78,8 @@
     window.render.getPins(temporaryPins);
   };
 
-  Object.keys(filters).forEach(function (el) {
-    filters[el].addEventListener('change', updatePins);
+  Object.keys(filtersBlock).forEach(function (el) {
+    filtersBlock[el].addEventListener('change', updatePins);
   });
 
   // Callback for rendering pins from server data
@@ -98,7 +98,7 @@
   window.filter = {
     successHandler: successHandler,
     errorHandler: errorHandler,
-    filters: filters,
+    filtersBlock: filtersBlock,
     filterFeatures: filterFeatures
   };
 })();

@@ -75,7 +75,7 @@
     form.reset();
     window.form.getMinPriceOfAccomodation();
 
-    window.render.mapPins.prepend(window.render.overlay);
+    window.render.mapPinsContainer.prepend(window.render.overlay);
     // Find main pin and set it into the first position
     window.render.mainPin.setAttribute('style', COORDS_OF_MAIN_PIN);
     window.form.getAddress(window.form.MAIN_PIN_X_ACTIVE, window.form.MAIN_PIN_Y_ACTIVE);
@@ -114,7 +114,7 @@
         obj[el].checked = false;
       });
     };
-    resetFilter(window.filter.filters);
+    resetFilter(window.filter.filtersBlock);
     resetFilter(window.filter.filterFeatures);
   };
 

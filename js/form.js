@@ -41,9 +41,9 @@
   var featuresList = document.querySelector('#housing-features');
 
   // Find list of options of rooms
-  var selectRooms = document.querySelector('#room_number');
-  var selectGuests = document.querySelector('#capacity');
-  var optionGuests = selectGuests.querySelectorAll('option');
+  var roomsCountSelect = document.querySelector('#room_number');
+  var guestsCountSelect = document.querySelector('#capacity');
+  var optionGuests = guestsCountSelect.querySelectorAll('option');
 
   // Create function for cleaning data from selected
   var timein = document.querySelector('#timein');
@@ -136,38 +136,38 @@
       this.y = y;
     };
 
-    var startCoords = new Coord(evt.clientX, evt.clientY);
+    var startCoordObject = new Coord(evt.clientX, evt.clientY);
 
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
       getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
 
-      var coordX = startCoords.x - moveEvt.clientX;
-      var coordY = startCoords.y - moveEvt.clientY;
+      var coordX = startCoordObject.x - moveEvt.clientX;
+      var coordY = startCoordObject.y - moveEvt.clientY;
 
       var shift = new Coord(coordX, coordY);
 
-      startCoords = new Coord(moveEvt.clientX, moveEvt.clientY);
+      startCoordObject = new Coord(moveEvt.clientX, moveEvt.clientY);
 
       var offsetLeft = window.render.mainPin.offsetLeft;
       var offsetTop = window.render.mainPin.offsetTop;
 
       if (offsetLeft - shift.x + MAIN_PIN_X_ACTIVE / 2 < 0) {
-        startCoords.x = '0px' + MAIN_PIN_X_ACTIVE;
-        return startCoords.x;
+        startCoordObject.x = '0px' + MAIN_PIN_X_ACTIVE;
+        return startCoordObject.x;
 
       } else if (offsetLeft - shift.x + MAIN_PIN_X_ACTIVE / 2 > window.render.map.clientWidth) {
-        startCoords.x = window.render.map.clientWidth + 'px';
-        return startCoords.x;
+        startCoordObject.x = window.render.map.clientWidth + 'px';
+        return startCoordObject.x;
       }
 
       if (offsetTop - shift.y + MAIN_PIN_Y_ACTIVE > COORD_Y.max) {
-        startCoords.y = COORD_Y.max + 'px';
-        return startCoords.y;
+        startCoordObject.y = COORD_Y.max + 'px';
+        return startCoordObject.y;
 
       } else if (offsetTop - shift.y + MAIN_PIN_Y_ACTIVE / 2 < COORD_Y.min - MAIN_PIN_Y_ACTIVE / 2) {
-        startCoords.y = COORD_Y.min + 'px';
-        return startCoords.y;
+        startCoordObject.y = COORD_Y.min + 'px';
+        return startCoordObject.y;
       }
 
       window.render.mainPin.style.top = (offsetTop - shift.y) + 'px';
@@ -199,7 +199,7 @@
   // Create a function to cansel disabled on option for choosing guests
   var getAvailableGuests = function () {
     setOptionDisabled(optionGuests);
-    var selectedRoom = selectRooms.selectedIndex;
+    var selectedRoom = roomsCountSelect.selectedIndex;
     var dataGuests = ROOMS_GUESTS_RELATION[ROOMS[selectedRoom]];
 
     for (var j = 0; j < GUESTS.length; j++) {
@@ -210,16 +210,16 @@
 
         // Selecting one guest to avoid validation errors
         if (selectedRoom < dataGuests.length) {
-          selectGuests.selectedIndex = DEFAULT_OPTION_IDX;
+          guestsCountSelect.selectedIndex = DEFAULT_OPTION_IDX;
         } else {
-          selectGuests.selectedIndex = NOT_GUEST_OPTION_IDX;
+          guestsCountSelect.selectedIndex = NOT_GUEST_OPTION_IDX;
         }
       }
     }
   };
 
   // Put a handler on to control the list of guests
-  selectRooms.addEventListener('change', function () {
+  roomsCountSelect.addEventListener('change', function () {
     getAvailableGuests();
   });
 
