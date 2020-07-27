@@ -55,17 +55,15 @@
 
   // Create a function for setting 'disabled' on fields of the form
   var setOptionDisabled = function (fields) {
-    for (var j = 0; j < fields.length; j++) {
-      var fieldsetItem = fields[j];
-      fieldsetItem.setAttribute('disabled', 'disabled');
-    }
+    Object.keys(fields).forEach(function (el) {
+      fields[el].setAttribute('disabled', 'disabled');
+    });
   };
 
-  var deleteOptionDisabled = function (data) {
-    for (var k = 0; k < data.length; k++) {
-      var objectItem = data[k];
-      objectItem.removeAttribute('disabled', 'disabled');
-    }
+  var deleteOptionDisabled = function (fields) {
+    Object.keys(fields).forEach(function (el) {
+      fields[el].removeAttribute('disabled', 'disabled');
+    });
   };
 
   // Set 'disabled' on each fieldset of the form
