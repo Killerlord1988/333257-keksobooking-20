@@ -105,7 +105,7 @@
 
     // Render pins on the map from server data
     var server = window.filter;
-    window.request.createQuery(server.successHandler, server.errorHandler, window.request.methods.GET, window.request.url.LOAD);
+    window.request.createQuery(server.successHandler, server.errorHandler, window.request.Methods.GET, window.request.url.LOAD);
     window.render.map.classList.remove('map--faded');
     form.classList.remove('ad-form--disabled');
 
@@ -194,7 +194,7 @@
   // Put disabled on list of guests to avoid bag with 1 room and 1 guest when the page
   // will be opened without changing amount of rooms
   setOptionDisabled(guestsCountOptions);
-  guestsCountOptions[2].removeAttribute('disabled', 'disabled');
+  guestsCountOptions[DEFAULT_OPTION_IDX].removeAttribute('disabled', 'disabled');
 
   // Create a function to cansel disabled on option for choosing guests
   var getAvailableGuests = function () {
@@ -246,7 +246,7 @@
   });
 
   form.addEventListener('submit', function (evt) {
-    window.request.createQuery(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.methods.POST, window.request.url.UPLOAD, new FormData(form));
+    window.request.createQuery(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.Methods.POST, window.request.url.UPLOAD, new FormData(form));
     evt.preventDefault();
   });
 

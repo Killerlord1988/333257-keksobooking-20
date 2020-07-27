@@ -2,15 +2,20 @@
 'use strict';
 
 (function () {
-  var methods = {
+  var Methods = {
     GET: 'GET',
     POST: 'POST'
   };
   var SUCCESS_CODE = 200;
-  var avatarSize = {
+  var AvatarSize = {
     WIDTH: '40',
     HEIGHT: '44'
   };
+  var DefaultPaddingAvatarPreview = {
+    PADDING_LEFT: '15px',
+    PADDING_RIGHT: '15px'
+  };
+  var defaultImgSrc = 'img/muffin-grey.svg';
 
   var url = {
     LOAD: 'https://javascript.pages.academy/keksobooking/data',
@@ -46,10 +51,10 @@
     });
 
     switch (method) {
-      case methods.GET:
+      case Methods.GET:
         xhr.send();
         break;
-      case methods.POST:
+      case Methods.POST:
         xhr.send(data);
         break;
     }
@@ -61,11 +66,11 @@
 
   var clearSrcImage = function (image) {
     var preview = document.querySelector('.ad-form-header__preview');
-    preview.style.paddingLeft = '15px';
-    preview.style.paddingRight = '15px';
-    image.src = 'img/muffin-grey.svg';
-    image.WIDTH = avatarSize.WIDTH;
-    image.HEIGHT = avatarSize.HEIGHT;
+    preview.style.paddingLeft = DefaultPaddingAvatarPreview.PADDING_LEFT;
+    preview.style.paddingRight = DefaultPaddingAvatarPreview.PADDING_RIGHT;
+    image.src = defaultImgSrc;
+    image.width = AvatarSize.WIDTH;
+    image.height = AvatarSize.HEIGHT;
   };
 
   var resetForm = function () {
@@ -185,7 +190,7 @@
     uploadSuccessHandler: uploadSuccessHandler,
     createQuery: createQuery,
     url: url,
-    methods: methods,
+    Methods: Methods,
     error: error
   };
 })();

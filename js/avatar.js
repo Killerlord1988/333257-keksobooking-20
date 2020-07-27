@@ -3,12 +3,17 @@
 
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var AvatarPreviewSize = {
+    WIDTH: '70',
+    HEIGHT: '70'
+  };
+  var resetPaddingAvatarPreview = '0';
 
   var createImg = function (link) {
     var image = document.createElement('img');
     image.src = link;
-    image.width = '70';
-    image.height = '70';
+    image.width = AvatarPreviewSize.WIDTH;
+    image.height = AvatarPreviewSize.HEIGHT;
     return image;
   };
 
@@ -39,7 +44,7 @@
             var reader = new FileReader();
             reader.addEventListener('load', function () {
               addImg(reader.result, container);
-              preview.style.padding = '0';
+              preview.style.padding = resetPaddingAvatarPreview;
             });
             reader.readAsDataURL(file[key]);
           }

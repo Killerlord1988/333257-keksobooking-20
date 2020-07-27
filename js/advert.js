@@ -10,6 +10,11 @@
     PALACE: 'Дворец'
   };
 
+  var PopupPhotoSize = {
+    WIDTH: '45',
+    HEIGHT: '40'
+  };
+
   // Search template advert for a pin card
   var advertTemplate = document.querySelector('#card')
     .content.
@@ -26,8 +31,8 @@
       imageItem.classList.add('popup__photo');
 
       imageItem.src = items[i];
-      imageItem.width = '45';
-      imageItem.height = '40';
+      imageItem.width = PopupPhotoSize.WIDTH;
+      imageItem.height = PopupPhotoSize.HEIGHT;
       imageItem.alt = 'Фотография жилья' + ' ' + (i + 1);
       imagesBlock.append(imageItem);
     }
