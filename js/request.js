@@ -157,9 +157,9 @@
     var messageSuccess = document.body.querySelector('main .success');
 
     // Create callback to delete message by click
-    var onFormSuccessWindow = function () {
+    var onOpenedFormSuccessClick = function () {
       messageSuccess.parentNode.removeChild(messageSuccess);
-      document.removeEventListener('click', onFormSuccessWindow);
+      document.removeEventListener('click', onOpenedFormSuccessClick);
       document.removeEventListener('keydown', onFormSuccessEscapePress);
     };
 
@@ -167,12 +167,12 @@
     var onFormSuccessEscapePress = function (evt) {
       if (evt.key === window.util.ESC_KEY) {
         messageSuccess.parentNode.removeChild(messageSuccess);
-        document.removeEventListener('click', onFormSuccessWindow);
+        document.removeEventListener('click', onOpenedFormSuccessClick);
         document.removeEventListener('keydown', onFormSuccessEscapePress);
       }
     };
 
-    document.addEventListener('click', onFormSuccessWindow);
+    document.addEventListener('click', onOpenedFormSuccessClick);
     document.addEventListener('keydown', onFormSuccessEscapePress);
 
     resetForm();
