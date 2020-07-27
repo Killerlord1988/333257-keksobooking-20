@@ -3,11 +3,11 @@
 
 (function () {
   // Property type dictionary
-  var TRANSLATE_OF_ACCOMODATION = {
-    bungalo: 'Бунгало',
-    flat: 'Квартира',
-    house: 'Дом',
-    palace: 'Дворец'
+  var TranslateOfAccomodation = {
+    BUNGALO: 'Бунгало',
+    FLAT: 'Квартира',
+    HOUSE: 'Дом',
+    PALACE: 'Дворец'
   };
 
   // Search template advert for a pin card
@@ -49,7 +49,7 @@
     advertElement.querySelector('.popup__title').textContent = pattern.title;
     advertElement.querySelector('.popup__text--address').textContent = pattern.address;
     advertElement.querySelector('.popup__text--price').textContent = pattern.price + ' ₽/ночь';
-    advertElement.querySelector('.popup__type').textContent = TRANSLATE_OF_ACCOMODATION[pattern.type];
+    advertElement.querySelector('.popup__type').textContent = TranslateOfAccomodation[pattern.type];
 
     advertElement.querySelector('.popup__text--capacity').textContent = pattern.rooms + (pattern.rooms === 1 ? ' комнатa для ' : ' комнаты для ') + pattern.guests + (pattern.guests === 1 ? ' гостя ' : ' гостей');
     advertElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + pattern.checkin + ' выезд до ' + pattern.checkout;

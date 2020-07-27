@@ -28,7 +28,7 @@
     'high': 50000
   };
 
-  // Create a function to get a name of a range of a price
+  // Create a function to GET a name of a range of a price
   var getRangePrice = function (cost) {
     var typeOfPrice;
     if (cost <= pricesBlock.low) {

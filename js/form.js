@@ -8,19 +8,19 @@
   var MAIN_PIN_Y = 64;
   var MAIN_PIN_X_ACTIVE = 64;
   var MAIN_PIN_Y_ACTIVE = 84;
-  var COORD_Y = {
-    min: 130,
-    max: 630
+  var coordinatesY = {
+    MIN: 130,
+    MAX: 630
   };
 
-  var MINPRICE_OF_ACCOMODATION = {
+  var MinpriceOfAccomodation = {
     bungalo: 0,
     flat: 1000,
     house: 5000,
     palace: 10000
   };
 
-  var ROOMS_GUESTS_RELATION = {
+  var RoomsGuestsRelation = {
     1: [1],
     2: [1, 2],
     3: [1, 2, 3],
@@ -105,7 +105,7 @@
 
     // Render pins on the map from server data
     var server = window.filter;
-    window.request.createRequest(server.successHandler, server.errorHandler, window.request.METHODS.get, window.request.URL.load);
+    window.request.createRequest(server.successHandler, server.errorHandler, window.request.methods.GET, window.request.url.LOAD);
     window.render.map.classList.remove('map--faded');
     form.classList.remove('ad-form--disabled');
 
@@ -161,12 +161,12 @@
         return startCoordObject.x;
       }
 
-      if (offsetTop - shift.y + MAIN_PIN_Y_ACTIVE > COORD_Y.max) {
-        startCoordObject.y = COORD_Y.max + 'px';
+      if (offsetTop - shift.y + MAIN_PIN_Y_ACTIVE > coordinatesY.MAX) {
+        startCoordObject.y = coordinatesY.MAX + 'px';
         return startCoordObject.y;
 
-      } else if (offsetTop - shift.y + MAIN_PIN_Y_ACTIVE / 2 < COORD_Y.min - MAIN_PIN_Y_ACTIVE / 2) {
-        startCoordObject.y = COORD_Y.min + 'px';
+      } else if (offsetTop - shift.y + MAIN_PIN_Y_ACTIVE / 2 < coordinatesY.MIN - MAIN_PIN_Y_ACTIVE / 2) {
+        startCoordObject.y = coordinatesY.MIN + 'px';
         return startCoordObject.y;
       }
 
@@ -200,7 +200,7 @@
   var getAvailableGuests = function () {
     setOptionDisabled(guestsCountOptions);
     var selectedRoom = roomsCountSelect.selectedIndex;
-    var dataGuests = ROOMS_GUESTS_RELATION[ROOMS[selectedRoom]];
+    var dataGuests = RoomsGuestsRelation[ROOMS[selectedRoom]];
 
     for (var j = 0; j < GUESTS.length; j++) {
       for (var k = 0; k < dataGuests.length; k++) {
@@ -227,9 +227,9 @@
   var getMinPriceOfAccomodation = function () {
     var typeOptions = type.querySelectorAll('option');
     var index = type.selectedIndex;
-    price.setAttribute('min', MINPRICE_OF_ACCOMODATION[typeOptions[index].value]);
-    price.setAttribute('placeholder', MINPRICE_OF_ACCOMODATION[typeOptions[index].value]);
-    price.value = MINPRICE_OF_ACCOMODATION[typeOptions[index].value];
+    price.setAttribute('min', MinpriceOfAccomodation[typeOptions[index].value]);
+    price.setAttribute('placeholder', MinpriceOfAccomodation[typeOptions[index].value]);
+    price.value = MinpriceOfAccomodation[typeOptions[index].value];
   };
 
   // Put on a handler if type of accomodation is changed
@@ -246,7 +246,7 @@
   });
 
   form.addEventListener('submit', function (evt) {
-    window.request.createRequest(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.METHODS.post, window.request.URL.upload, new FormData(form));
+    window.request.createRequest(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.methods.POST, window.request.url.UPLOAD, new FormData(form));
     evt.preventDefault();
   });
 

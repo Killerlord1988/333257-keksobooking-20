@@ -2,19 +2,19 @@
 'use strict';
 
 (function () {
-  var METHODS = {
-    get: 'GET',
-    post: 'POST'
+  var methods = {
+    GET: 'GET',
+    POST: 'POST'
   };
   var SUCCESS_CODE = 200;
-  var AVATAR_SIZE = {
-    width: '40',
-    height: '44'
+  var avatarSize = {
+    WIDTH: '40',
+    HEIGHT: '44'
   };
 
-  var URL = {
-    load: 'https://javascript.pages.academy/keksobooking/data',
-    upload: 'https://javascript.pages.academy/keksobooking/'
+  var url = {
+    LOAD: 'https://javascript.pages.academy/keksobooking/data',
+    UPLOAD: 'https://javascript.pages.academy/keksobooking/'
   };
 
   var COORDS_OF_MAIN_PIN = 'left: 570px; top: 375px;';
@@ -32,10 +32,10 @@
     .querySelector('.success');
   var success = successTemplate.cloneNode(true);
 
-  var createRequest = function (onSuccess, onError, method, url, data) {
+  var createRequest = function (onSuccess, onError, method, urlAddress, data) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    xhr.open(method, url);
+    xhr.open(method, urlAddress);
 
     xhr.addEventListener('load', function () {
       if (xhr.status === SUCCESS_CODE) {
@@ -46,10 +46,10 @@
     });
 
     switch (method) {
-      case METHODS.get:
+      case methods.GET:
         xhr.send();
         break;
-      case METHODS.post:
+      case methods.POST:
         xhr.send(data);
         break;
     }
@@ -64,8 +64,8 @@
     preview.style.paddingLeft = '15px';
     preview.style.paddingRight = '15px';
     image.src = 'img/muffin-grey.svg';
-    image.width = AVATAR_SIZE.width;
-    image.height = AVATAR_SIZE.height;
+    image.WIDTH = avatarSize.WIDTH;
+    image.HEIGHT = avatarSize.HEIGHT;
   };
 
   var resetForm = function () {
@@ -184,8 +184,8 @@
     uploadErrorHandler: uploadErrorHandler,
     uploadSuccessHandler: uploadSuccessHandler,
     createRequest: createRequest,
-    URL: URL,
-    METHODS: METHODS,
+    url: url,
+    methods: methods,
     error: error
   };
 })();
