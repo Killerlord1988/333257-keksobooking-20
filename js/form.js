@@ -138,7 +138,7 @@
 
     var startCoordObject = new Coord(evt.clientX, evt.clientY);
 
-    var onMouseMove = function (moveEvt) {
+    var MouseMoveHandler = function (moveEvt) {
       moveEvt.preventDefault();
       getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
 
@@ -182,11 +182,11 @@
       // Change сoordinates for pin in the field of address
       getAddress(MAIN_PIN_X_ACTIVE, MAIN_PIN_Y_ACTIVE);
 
-      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mousemove', MouseMoveHandler);
       document.removeEventListener('mouseup', onMouseUp);
     };
 
-    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousemove', MouseMoveHandler);
     document.addEventListener('mouseup', onMouseUp);
 
   });
