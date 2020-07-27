@@ -136,6 +136,7 @@
       messageError.parentNode.removeChild(messageError);
       document.removeEventListener('click', onFormErrorButton);
       document.removeEventListener('keydown', onFormErrorEscapePress);
+      resetForm();
     };
 
     // Create callback to delete message by press Escape
@@ -144,6 +145,7 @@
         messageError.parentNode.removeChild(messageError);
         document.removeEventListener('keydown', onFormErrorEscapePress);
         document.removeEventListener('click', onFormErrorButton);
+        resetForm();
       }
     };
 
@@ -166,6 +168,7 @@
       messageSuccess.parentNode.removeChild(messageSuccess);
       document.removeEventListener('click', onOpenedFormSuccessClick);
       document.removeEventListener('keydown', onFormSuccessEscapePress);
+      resetForm();
     };
 
     // Create callback to delete message by press Escape
@@ -174,13 +177,13 @@
         messageSuccess.parentNode.removeChild(messageSuccess);
         document.removeEventListener('click', onOpenedFormSuccessClick);
         document.removeEventListener('keydown', onFormSuccessEscapePress);
+        resetForm();
       }
     };
 
     document.addEventListener('click', onOpenedFormSuccessClick);
     document.addEventListener('keydown', onFormSuccessEscapePress);
 
-    resetForm();
   };
 
   clearFormButton.addEventListener('click', resetForm);
