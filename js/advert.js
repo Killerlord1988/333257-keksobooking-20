@@ -67,6 +67,7 @@
     // Add a photo to the ad card based on a random array
     addImages(advertisment.offer.photos);
 
+    // Delete map__pin--active class
     var deleteActivePinClass = function () {
       var activePin = document.querySelector('.map__pin--active');
       activePin.classList.remove('map__pin--active');
