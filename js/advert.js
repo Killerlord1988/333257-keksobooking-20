@@ -67,15 +67,22 @@
     // Add a photo to the ad card based on a random array
     addImages(advertisment.offer.photos);
 
+    var deleteActivePinClass = function () {
+      var activePin = document.querySelector('.map__pin--active');
+      activePin.classList.remove('map__pin--active');
+    };
+
     // Put on a handler for closing advert
     var onPopuoCloseEscapePress = function (evt) {
       if (evt.key === window.util.ESC_KEY) {
+        deleteActivePinClass();
         window.render.deleteAdvert();
         document.removeEventListener('keydown', onPopuoCloseEscapePress);
       }
     };
 
     buttonPopup.addEventListener('click', function () {
+      deleteActivePinClass();
       window.render.deleteAdvert();
       document.removeEventListener('keydown', onPopuoCloseEscapePress);
     });
