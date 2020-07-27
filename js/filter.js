@@ -4,7 +4,7 @@
 (function () {
   var DEFAULT_FILTER = 'any';
 
-  var filtersBlock = {
+  var sampleBlock = {
     type: document.querySelector('#housing-type'),
     price: document.querySelector('#housing-price'),
     rooms: document.querySelector('#housing-rooms'),
@@ -12,8 +12,8 @@
     features: document.querySelector('#housing-features')
   };
 
-  var featuresLists = Array.from(filtersBlock.features.querySelectorAll('input'));
-  var filterFeatures = document.querySelectorAll('input[name=features]');
+  var featuresLists = Array.from(sampleBlock.features.querySelectorAll('input'));
+  var sampleFeatures = document.querySelectorAll('input[name=features]');
 
   // Copy data which was got from the server
   var pins = [];
@@ -51,7 +51,7 @@
       });
 
     var temporaryPins = pins.filter(function (pin) {
-      return Object.keys(filtersBlock).every(function (key) {
+      return Object.keys(sampleBlock).every(function (key) {
         if (key === 'features') {
           if (activeFeatures.length) {
             return activeFeatures.every(function (feature) {
@@ -60,7 +60,7 @@
           }
           return true;
         } else {
-          var value = filtersBlock[key].value;
+          var value = sampleBlock[key].value;
 
           if (value === DEFAULT_FILTER) {
             return true;
@@ -78,8 +78,8 @@
     window.render.getPins(temporaryPins);
   };
 
-  Object.keys(filtersBlock).forEach(function (el) {
-    filtersBlock[el].addEventListener('change', updatePins);
+  Object.keys(sampleBlock).forEach(function (el) {
+    sampleBlock[el].addEventListener('change', updatePins);
   });
 
   // Callback for rendering pins from server data
@@ -98,7 +98,7 @@
   window.filter = {
     successHandler: successHandler,
     errorHandler: errorHandler,
-    filtersBlock: filtersBlock,
-    filterFeatures: filterFeatures
+    sampleBlock: sampleBlock,
+    sampleFeatures: sampleFeatures
   };
 })();

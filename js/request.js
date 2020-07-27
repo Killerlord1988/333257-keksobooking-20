@@ -32,7 +32,7 @@
     .querySelector('.success');
   var success = successTemplate.cloneNode(true);
 
-  var createRequest = function (onSuccess, onError, method, urlAddress, data) {
+  var createQuery = function (onSuccess, onError, method, urlAddress, data) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.open(method, urlAddress);
@@ -114,8 +114,8 @@
         obj[el].checked = false;
       });
     };
-    resetFilter(window.filter.filtersBlock);
-    resetFilter(window.filter.filterFeatures);
+    resetFilter(window.filter.sampleBlock);
+    resetFilter(window.filter.sampleFeatures);
   };
 
   // Create function if there is a mistake in an uploading form
@@ -183,7 +183,7 @@
   window.request = {
     uploadErrorHandler: uploadErrorHandler,
     uploadSuccessHandler: uploadSuccessHandler,
-    createRequest: createRequest,
+    createQuery: createQuery,
     url: url,
     methods: methods,
     error: error

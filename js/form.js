@@ -105,7 +105,7 @@
 
     // Render pins on the map from server data
     var server = window.filter;
-    window.request.createRequest(server.successHandler, server.errorHandler, window.request.methods.GET, window.request.url.LOAD);
+    window.request.createQuery(server.successHandler, server.errorHandler, window.request.methods.GET, window.request.url.LOAD);
     window.render.map.classList.remove('map--faded');
     form.classList.remove('ad-form--disabled');
 
@@ -246,7 +246,7 @@
   });
 
   form.addEventListener('submit', function (evt) {
-    window.request.createRequest(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.methods.POST, window.request.url.UPLOAD, new FormData(form));
+    window.request.createQuery(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.methods.POST, window.request.url.UPLOAD, new FormData(form));
     evt.preventDefault();
   });
 
