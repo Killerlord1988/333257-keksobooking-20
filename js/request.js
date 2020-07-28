@@ -166,7 +166,7 @@
     var onOpenedFormSuccessClick = function (evt) {
       if (evt.target.classList.contains('success__message')) {
         return;
-      };
+      }
 
       messageSuccess.parentNode.removeChild(messageSuccess);
       document.removeEventListener('click', onOpenedFormSuccessClick);
