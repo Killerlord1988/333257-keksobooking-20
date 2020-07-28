@@ -105,7 +105,6 @@
     // Create a handler for activating form again
     var onMapPinClick = function () {
       window.form.makeActive(advertFieldset);
-      window.form.getAddress(window.form.MAIN_PIN_X_ACTIVE, window.form.MAIN_PIN_Y_ACTIVE);
       window.render.mainPin.removeEventListener('click', onMapPinClick);
     };
 
