@@ -248,25 +248,17 @@
   filtersCheckbox.forEach(function (checkbox) {
     checkbox.addEventListener('keydown', function (evt) {
       if (evt.key === window.util.ENT_KEY) {
+        evt.preventDefault();
         var isChecked = evt.target.checked;
         evt.target.checked = !isChecked;
         window.filter.updatePins();
       }
     });
   });
-  form.addEventListener('keydown', function (evt) {
-    if (evt.key === window.util.ENT_KEY && evt.target.getAttribute('type') !== 'checkbox') {
-      window.request.createQuery(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.Methods.POST, window.request.url.UPLOAD, new FormData(form));
-    }
-  });
-
-  submitButton.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    window.request.createQuery(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.Methods.POST, window.request.url.UPLOAD, new FormData(form));
-  });
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
+    window.request.createQuery(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.Methods.POST, window.request.url.UPLOAD, new FormData(form));
   });
 
   window.form = {
