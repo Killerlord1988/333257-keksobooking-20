@@ -99,6 +99,7 @@
     successHandler: successHandler,
     errorHandler: errorHandler,
     sampleBlock: sampleBlock,
-    sampleFeatures: sampleFeatures
+    sampleFeatures: sampleFeatures,
+    updatePins: updatePins
   };
 })();
