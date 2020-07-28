@@ -31,6 +31,7 @@
   var GUESTS = [3, 2, 1, 0];
 
   var form = document.querySelector('.ad-form');
+  var submitButton = form.querySelector('.ad-form__submit');
   var isActive = false;
   var addressInput = document.querySelector('#address');
 
@@ -258,6 +259,12 @@
       window.request.createQuery(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.Methods.POST, window.request.url.UPLOAD, new FormData(form));
     }
   });
+
+  submitButton.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    window.request.createQuery(window.request.uploadSuccessHandler, window.request.uploadErrorHandler, window.request.Methods.POST, window.request.url.UPLOAD, new FormData(form));
+  });
+
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
   });
