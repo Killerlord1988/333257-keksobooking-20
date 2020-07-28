@@ -31,7 +31,6 @@
   };
 
   var attachPhoto = function (chooser, container) {
-
     chooser.addEventListener('change', function () {
       var file = chooser.files;
       if (file) {
