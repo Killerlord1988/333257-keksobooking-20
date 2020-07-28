@@ -47,6 +47,8 @@
               preview.style.padding = resetPaddingAvatarPreview;
             });
             reader.readAsDataURL(file[key]);
+          } else {
+            chooser.value = null;
           }
         });
       }
