@@ -31,7 +31,6 @@
   var GUESTS = [3, 2, 1, 0];
 
   var form = document.querySelector('.ad-form');
-  var submitButton = form.querySelector('.ad-form__submit');
   var isActive = false;
   var addressInput = document.querySelector('#address');
 
