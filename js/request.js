@@ -131,7 +131,10 @@
     var messageError = document.body.querySelector('main .error');
 
     // Create callback to delete message by click
-    var onFormErrorButton = function () {
+    var onFormErrorButton = function (evt) {
+      if (evt.target.classList.contains('error__message')) {
+        return;
+      }
       messageError.parentNode.removeChild(messageError);
       document.removeEventListener('click', onFormErrorButton);
       document.removeEventListener('keydown', onFormErrorEscapePress);
@@ -167,7 +170,6 @@
       if (evt.target.classList.contains('success__message')) {
         return;
       }
-
       messageSuccess.parentNode.removeChild(messageSuccess);
       document.removeEventListener('click', onOpenedFormSuccessClick);
       document.removeEventListener('keydown', onFormSuccessEscapePress);
